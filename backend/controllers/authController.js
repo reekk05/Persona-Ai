@@ -19,7 +19,14 @@ const hashedPassword = await bcrypt.hash(password, 10)
 
 const result = createUser(name, email, hashedPassword)
 
+const token = jwt.sign(
+    {id: result.lastInsertRowid, email},
+    process.env.JWT_SECRET,
+    {expiresIn: "7d"}
+)
+
 res.status(201).json({
+    token,
     user:{
         id: result.lastInsertRowid,
         name,
@@ -51,7 +58,7 @@ export const loginUser = async (req, res) => {
 
         const token =jwt.sign(
             {id: user.id, email: user.email},
-            process.env.JWT_SEcret,
+            process.env.JWT_SECRET,
             {expiresIn: "7d"}
         )
 

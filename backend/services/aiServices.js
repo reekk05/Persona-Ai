@@ -1,7 +1,11 @@
-const API_KEY = process.env.GEMINI_API_KEY
+const API_KEY = process.env.GEMINI_API_KEY || process.env.API_KEY
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta"; 
 
 export const generateText = async (prompt) => {
+  if (!API_KEY) {
+    throw new Error("Missing Gemini API key. Set GEMINI_API_KEY in backend/.env.")
+  }
+
   const response = await fetch(
     `${BASE_URL}/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,
     {

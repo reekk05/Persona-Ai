@@ -118,8 +118,10 @@ Create a `.env` file inside `/backend`:
 ```env
 PORT=3000
 JWT_SECRET=your_secret_key
-API_KEY=your_ai_api_key
+GEMINI_API_KEY=your_gemini_api_key
 ```
+
+`GEMINI_API_KEY` is required for the backend text-generation feature. The image generation path uses Pollinations and does not require a separate API key.
 
 ---
 
@@ -128,7 +130,7 @@ API_KEY=your_ai_api_key
 Backend:
 
 ```bash
-npm run dev
+npm start
 ```
 
 Frontend:

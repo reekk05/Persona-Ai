@@ -27,7 +27,13 @@ const Login = () => {
         body: JSON.stringify(body)
       })
       console.log("Login response:", data)
-      localStorage.setItem("token", data.token)
+
+      if (data.token) {
+        localStorage.setItem("token", data.token)
+      } else {
+        localStorage.removeItem("token")
+      }
+
       localStorage.setItem("user", JSON.stringify(data.user))
 
       setUser(data.user)
